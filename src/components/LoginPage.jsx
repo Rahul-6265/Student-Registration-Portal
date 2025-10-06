@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
   const validateEmail = (email) =>
@@ -32,12 +33,13 @@ function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!email || !password || emailError || passwordError) {
       alert("Please fill fields correctly.");
       return;
     }
-    alert(`Logged in successfully:\nEmail: ${email}\nPassword: ${password}`);
-    navigate("/"); // Redirect to home or dashboard page
+    alert("Logged in successfully!");
+    navigate("/"); // Redirect to home page
   };
 
   return (
