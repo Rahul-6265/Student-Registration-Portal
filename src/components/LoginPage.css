@@ -1,0 +1,141 @@
+.page-center-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #667eea, #764ba2);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222222;
+  background: none;
+}
+
+.form-container {
+  background: rgba(255,255,255,0.95);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 12px 44px rgba(118,75,162,0.25);
+  max-width: 400px;
+  width: 90%;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #5b2e8e;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #5c527a;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 2px solid #e0d7f5;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-size: 1rem;
+}
+
+.input-field:focus {
+  border-color: #8f5fdf;
+  box-shadow: 0 0 10px #b39ddb80;
+}
+
+.radio-group,
+.checkbox-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.radio-group label,
+.checkbox-group label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #7956d6;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radio-group input[type='radio'],
+.checkbox-group input[type='checkbox'] {
+  width: 17px;
+  height: 17px;
+  margin-right: 8px;
+  accent-color: #7e57c2;
+  cursor: pointer;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: linear-gradient(90deg, #764ba2, #667eea);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 3px 18px rgba(118,75,162,0.35);
+}
+
+.submit-button:hover {
+  background: linear-gradient(90deg, #5e3fa6, #5864e7);
+  box-shadow: 0 6px 20px rgba(163,139,231,0.6);
+}
+
+.input-error {
+  border-color: #e53935;
+}
+
+.error-text {
+  color: #e53935;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: block;
+}
+
+.bottom-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.login-link {
+  color: #5b2e8e;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+@media(max-width: 460px) {
+  .form-container {
+    padding: 20px;
+  }
+  .form-title {
+    font-size: 1.6rem;
+  }
+}
