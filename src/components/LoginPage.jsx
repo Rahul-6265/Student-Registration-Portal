@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
   const validateEmail = (email) =>
@@ -14,7 +14,11 @@ function LoginPage() {
       : "Please enter a valid email address.";
 
   const validatePassword = (password) =>
-    password.length >= 6 ? "" : "Password must be at least 6 characters long.";
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(
+      password
+    )
+      ? ""
+      : "Password must contain at least 8 characters including letters, numbers, and special characters.";
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -28,13 +32,12 @@ function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!email || !password || emailError || passwordError) {
       alert("Please fill fields correctly.");
-    } else {
-      alert("Logged in successfully!");
-      // Add redirect or home page here if needed
+      return;
     }
+    alert(`Logged in successfully:\nEmail: ${email}\nPassword: ${password}`);
+    navigate("/"); // Redirect to home or dashboard page
   };
 
   return (
@@ -67,6 +70,12 @@ function LoginPage() {
           <button type="submit" className="submit-button">
             Login
           </button>
+          <div className="bottom-text">
+            Don't have an account?{" "}
+            <a href="/signup" className="login-link">
+              Sign up here
+            </a>
+          </div>
         </form>
       </div>
     </div>
