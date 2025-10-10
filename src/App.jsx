@@ -1,16 +1,24 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SignUpForm from "./components/SignUpForm";
-import LoginPage from "./components/LoginPage";
-import Home from "./components/Home";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import SignUpForm from "./pages/SignUpForm";
+import LoginPage from "./pages/LoginPage";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/signup" element={<SignUpForm />} />
+        {/* Redirect root path "/" to "/login" */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </Router>
   );

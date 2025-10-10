@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -31,15 +31,40 @@ function LoginPage() {
     setPasswordError(validatePassword(e.target.value));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email || !password || emailError || passwordError) {
       alert("Please fill fields correctly.");
       return;
     }
-    alert("Logged in successfully!");
-    navigate("/"); // Redirect to home page
+
+    try {
+      const response = await fetch("http://localhost:8081/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.message || "Logged in successfully!");
+        if (data.name) {
+          localStorage.setItem("userName", data.name);
+        } else {
+          localStorage.setItem("userName", email);
+        }
+
+        navigate("/home");
+      } else {
+        alert(data.error || "Login failed.");
+      }
+    } catch (error) {
+      alert("Network error: " + error.message);
+    }
   };
 
   return (
@@ -74,9 +99,9 @@ function LoginPage() {
           </button>
           <div className="bottom-text">
             Don't have an account?{" "}
-            <a href="/signup" className="login-link">
+            <Link to="/signup" className="login-link">
               Sign up here
-            </a>
+            </Link>
           </div>
         </form>
       </div>

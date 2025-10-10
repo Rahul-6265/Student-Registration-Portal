@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./SignUpForm.css";
 
 function SignUpForm() {
@@ -53,7 +53,7 @@ function SignUpForm() {
     setPasswordError(validatePassword(e.target.value));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (
@@ -71,8 +71,33 @@ function SignUpForm() {
       return;
     }
 
-    alert("Form submitted successfully!");
-    navigate("/login");
+    try {
+      const response = await fetch("http://localhost:8081/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          gender,
+          education,
+          course,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.message || "Form submitted successfully!");
+        navigate("/login");
+      } else {
+        alert(data.error || "Error submitting form.");
+      }
+    } catch (error) {
+      alert("Network error: " + error.message);
+    }
   };
 
   return (
@@ -217,9 +242,9 @@ function SignUpForm() {
           </button>
           <div className="bottom-text">
             Already have an account?{" "}
-            <a href="/login" className="login-link">
+            <Link to="/login" className="login-link">
               Login here
-            </a>
+            </Link>
           </div>
         </form>
       </div>
